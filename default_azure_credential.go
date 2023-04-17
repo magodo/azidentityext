@@ -50,6 +50,9 @@ type DefaultAzureCredential struct {
 }
 
 // NewDefaultAzureCredential creates a DefaultAzureCredential. Pass nil for options to accept defaults.
+// Some credentials builder function might return error, which will be returned in the `credErrors`,
+// in which case that failed credential will not be included as part of the returned `cred`.
+// If all the possible creds are all failed to build, non nil `err` will be returned.
 func NewDefaultAzureCredential(options *DefaultAzureCredentialOptions) (cred *DefaultAzureCredential, credErrors []error, err error) {
 	var creds []azcore.TokenCredential
 
